@@ -1,0 +1,8 @@
+telethon==1.44.0
+openai>=1.40.0
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+PyYAML>=6.0.1
+python-dotenv>=1.0.1
+aiofiles>=24.1.0
+structlog>=24.4.0

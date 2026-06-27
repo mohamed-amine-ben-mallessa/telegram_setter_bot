@@ -1,0 +1,15 @@
+scoring:
+  qualified_threshold: 70
+  book_call_threshold: 80
+  disqualify_threshold: 30
+  weights:
+    experience: 15     # trading experience level
+    budget: 25         # budget for signals
+    urgency: 20        # ready to start now
+    knowledge: 10      # knows what markets they want
+    interest: 20       # high intent signals (profit, gains)
+    referral: 10       # came from a member/crypto influencer
+  thresholds:
+    low_budget_max: 30     # budget < 30€ → low priority
+    trial_eligible: true   # propose trial for hesitant leads
+    max_followups: 4

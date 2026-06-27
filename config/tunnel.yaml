@@ -1,0 +1,323 @@
+# Tunnel de vente — Trading Signals Setter
+# 6 étapes de qualification avec placeholders URL
+
+tunnel:
+  name: "Signal Trading Funnel"
+  language: fr
+  
+# ─── Les 6 étapes du tunnel ───
+stages:
+  cold:
+    label: "❄️ Froid"
+    color: "#6b7280"
+    description: "Lead qui se renseigne, pas prêt à acheter"
+    forward_to_channel: false
+    script_key: "close_lost"
+    next_stage: null
+
+  warm:
+    label: "🔥 Chaud"
+    color: "#f97316"
+    description: "Intérêt confirmé, besoin identifié"
+    forward_to_channel: true
+    script_key: "follow_up_1"
+    next_stage: "hot"
+
+  hot:
+    label: "🔥🔥 Brûlant"
+    color: "#ef4444"
+    description: "Budget OK + Urgence + Intérêt fort"
+    forward_to_channel: true
+    script_key: "handoff"
+    next_stage: "booked"
+
+  trial:
+    label: "🧪 Essai"
+    color: "#8b5cf6"
+    description: "A accepté l'essai 7j à 1€"
+    forward_to_channel: true
+    script_key: "trial_confirm"
+    next_stage: "booked"
+
+  booked:
+    label: "📅 Booked"
+    color: "#22c55e"
+    description: "Call/rendez-vous prévu"
+    forward_to_channel: true
+    script_key: "book_confirmed"
+    next_stage: "subscribed"
+
+  subscribed:
+    label: "✅ Abonné"
+    color: "#10b981"
+    description: "Client actif"
+    forward_to_channel: false
+    script_key: "welcome"
+    next_stage: null
+
+# ─── Tags prédéfinis pour classifier les leads ───
+legends:
+  # Niveau d'expérience
+  experience:
+    beginner: "🌱 Débutant"
+    intermediate: "📈 Intermédiaire"
+    advanced: "🎯 Confirmé"
+    expert: "🏆 Expert"
+
+  # Type de marché
+  market:
+    crypto: "🪙 Crypto"
+    forex: "💱 Forex"
+    stocks: "📊 Actions"
+    commodities: "🥇 Commodities"
+    indices: "📈 Indices"
+
+  # Budget mensuel
+  budget:
+    low: "💸 Low (< 50€)"
+    medium: "💰 Medium (50-150€)"
+    high: "💎 High (150-500€)"
+    vip: "👑 VIP (500€+)"
+
+  # Urgence
+  urgency:
+    cold: "❄️ Plus tard"
+    warm: "🔥 Bientôt"
+    hot: "🔥🔥 Maintenant"
+
+  # Source / trafic
+  source:
+    dm: "📩 DM entrants"
+    referral: "👥 Recommandé"
+    channel: "📢 Channel/Groupe"
+    ads: "📢 Pub"
+
+# ─── URL Placeholders ───
+# Remplace par tes vraies URLs
+urls:
+  pricing: "https://tonsite.com/tarifs"
+  booking: "https://cal.com/ton-trader/appel-decouverte"
+  trial_checkout: "https://tonsite.com/essai-1euro"
+  telegram_group: "https://t.me/+XXXXXXXX"
+  results_channel: "https://t.me/+XXXXXXXX"
+  welcome_message: "https://tonsite.com/bienvenue"
+  support: "https://t.me/support_bot"
+
+# ─── Prix des abonnements ───
+pricing:
+  trial_7d:
+    name: "Essai 7 jours"
+    price: 1
+    currency: "€"
+    url_key: "trial_checkout"
+    
+  crypto_only:
+    name: "Signaux Crypto"
+    price: 49
+    currency: "€/mois"
+    url_key: "pricing"
+    
+  full_markets:
+    name: "Tous marchés"
+    price: 99
+    currency: "€/mois"
+    url_key: "pricing"
+    
+  vip:
+    name: "VIP"
+    price: 199
+    currency: "€/mois"
+    url_key: "pricing"
+
+# ─── Scripts du tunnel ───
+scripts:
+  opener: "Salut ! Tu t'intéresses aux signaux trading ? C'est quoi ton niveau ?"
+  
+  qualify_experience:
+    - "Tu trades depuis combien de temps ?"
+    - "Tu te consideres plutôt débutant ou confirmé ?"
+  
+  qualify_budget:
+    - "Tu as un budget mensuel pour les signaux ?"
+    - "Quel investissement mensuel tu prevois ?"
+  
+  qualify_urgency:
+    - "Tu veux commencer maintenant ou c'est pour plus tard ?"
+    - "C'est urgent ou tu te renseignes encore ?"
+  
+  qualify_market:
+    - "Tu trades quoi principalement ? Crypto, Forex, Actions ?"
+    - "C'est quoi tes marchés preferes ?"
+  
+  qualify_authority:
+    - "C'est toi qui decides ou tu en parles à qqn d'autre ?"
+    - "Tu as besoin de validation pour investir ?"
+  
+  qualify_why:
+    - "Qu'est-ce qui t'intéresse le plus dans les signaux ?"
+    - "Tu cherches quoi concrètement ?"
+  
+  # Propositions
+  propose_trial:
+    - "On propose un essai 7 jours à 1€. Tu veux tester ?"
+    - "Si tu veux essayer avant de t'abonner, on a un essai 7j à 1€."
+
+  propose_pricing:
+    - "Nos abonnements partent à 49€/mois pour crypto seul, 99€ pour tous marchés."
+    - "Tu peux voir tous nos tarifs ici : {url_pricing}"
+  
+  propose_booking:
+    - "Je te mets en contact avec notre trader pour les détails."
+    - "Tu peux booker un appel découverte gratuit ici : {url_booking}"
+  
+  # Closings
+  close_lost:
+    - "Pas de souci, si tu changes d'avis n'hésite pas !"
+    - "Merci pour ton temps, à bientôt !"
+  
+  follow_up_1:
+    - "Salut, nos derniers signaux BTC ont fait +15% cette semaine 👀"
+    - "Tu as pu réfléchir ? On a encore des places pour l'essai à 1€."
+  
+  follow_up_2:
+    - "Petit up — nos signaux ont performé +22% sur le BTC."
+    - "L'offre d'essai à 1€ est toujours dispo si tu veux tester."
+  
+  follow_up_3:
+    - "Dernier message, on arrête là si tu réponds pas. Bonne continuation !"
+  
+  trial_confirm:
+    - "Parfait, voici le lien pour l'essai : {url_trial_checkout}. Bonne session !"
+  
+  book_confirmed:
+    - "C'est noté, ton call est confirmé. À demain !"
+  
+  welcome:
+    - "Bienvenue ! Tu receveras les signaux dans le groupe : {url_telegram_group}. Voici nos résultats : {url_results_channel}"
+  
+  negative:
+    - "Pas de souci, on te dérange plus. Bonne continuation !"
+  
+  scam_alert:
+    - "Merci, on ne te recontactera pas. Bonne continuation."
+
+# ─── Score thresholds pour chaque étape ───
+thresholds:
+  cold_to_warm: 30      # Score pour devenir "warm"
+  warm_to_hot: 70       # Score pour devenir "hot"
+  hot_to_booked: 85     # Score pour booker un call
+  trial_to_subscribed: 50  # Score min pour upgrader du trial
+
+# ─── Règles de scoring détaillées ───
+scoring_rules:
+  # Expérience
+  experience_bonus:
+    "débutant": 5
+    "novice": 5
+    "débuté": 5
+    "commence": 5
+    "intermédiaire": 8
+    "quelques mois": 8
+    "confirmé": 12
+    "expert": 15
+    "pro": 15
+  
+  # Budget (tous les formats detectés)
+  budget_amounts:
+    # Format : "X €" / "Xe" / "X euros" / "X balles" / "X$"
+    "low":    [20, 30, 49]
+    "medium": [50, 99, 100, 150]
+    "high":   [200, 250, 300, 500]
+    "vip":    [600, 700, 1000, 1500, 2000]
+  
+  # Urgences
+  urgency_hot:
+    - "maintenant"
+    - "urgent"
+    - "tout de suite"
+    - "aujourd'hui"
+    - "cette semaine"
+    - "dès que possible"
+    - "le plus tôt"
+    - "impatient"
+  
+  urgency_warm:
+    - "bientôt"
+    - "ce mois-ci"
+    - "quelques jours"
+  
+  urgency_cold:
+    - "plus tard"
+    - "je verrai"
+    - "je réfléchis"
+    - "je me renseigne"
+    - "pas maintenant"
+    - "peut-être"
+
+  # Intérêt fort
+  high_interest:
+    - "intéressé"
+    - "go"
+    - "partant"
+    - "je veux"
+    - "j'aimerais"
+    - "besoin"
+    - "profit"
+    - "gain"
+    - "gagner"
+    - "abonner"
+    - "s'abonner"
+    - "signaux"
+    - "signal"
+
+  # Marchés
+  markets:
+    crypto:
+      - "crypto"
+      - "bitcoin"
+      - "btc"
+      - "ethereum"
+      - "eth"
+      - "altcoin"
+      - "solana"
+      - "defi"
+    forex:
+      - "forex"
+      - "eur/usd"
+      - "gbp/usd"
+      - "paire"
+      - " devises"
+    stocks:
+      - "actions"
+      - "bourse"
+      - "stock"
+      - "nasdaq"
+      - "sp500"
+    commodities:
+      - "or"
+      - "gold"
+      - "pétrole"
+      - "silver"
+
+  # Négatifs
+  negative:
+    - "pas intéressé"
+    - "non merci"
+    - "laisse-moi"
+    - "spame"
+    - "arnaque"
+    - "scam"
+    - "faux"
+    - "arnaque"
+    - "pourri"
+    - "mauvais"
+  
+  # Referral
+  referral:
+    - "on m'a dit"
+    - "on m'a parlé"
+    - "recommandé"
+    - "ami"
+    - "membre"
+    - "déjà abonné"
+    - "déjà client"

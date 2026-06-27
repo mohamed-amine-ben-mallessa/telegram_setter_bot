@@ -1,0 +1,60 @@
+# ─── Secrets & Credentials ───
+.env
+*.env
+.env.*
+.envrc
+.credentials*
+*credentials*
+
+# ─── Session files (contain auth tokens) ───
+*.session
+*.session-journal
+*.session-lock
+trading_setter_session
+telegram_session
+
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# ─── Virtual environments ───
+.venv/
+venv/
+ENV/
+env/
+
+# ─── Data & DB ───
+*.db
+*.sqlite
+*.sqlite3
+data/
+*.log
+mcp_errors.log
+
+# ─── IDE & OS ───
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ─── Local overrides ───
+.local/
+.config.local
+*.local.yaml
+
+# ─── Secrets scan ───
+# Patterns to NEVER commit
+*.pem
+*.key
+*.crt
+credentials.json
+token*.txt

@@ -1,0 +1,11 @@
+routing:
+  new: engaged
+  engaged: qualified
+  qualified: book_call
+  book_call: handoff
+  follow_up: engaged
+  trial_active: qualified
+  trial_ended: follow_up
+  not_qualified: closed_lost
+  closed_lost: closed_lost
+  subscribed: subscribed

@@ -1,0 +1,23 @@
+[Unit]
+Description=Telegram Setter Bot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/telegram_setter_bot
+ExecStart=/opt/telegram_setter_bot/.venv/bin/python -m app.main
+Restart=always
+RestartSec=3
+EnvironmentFile=/opt/telegram_setter_bot/.env
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/telegram_setter_bot/data
+
+[Install]
+WantedBy=multi-user.target

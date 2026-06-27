@@ -1,0 +1,21 @@
+role:
+  title: Trading Signals Setter
+  aliases:
+    - Trading Setter
+    - Signal Setter
+    - Trading DM Setter
+  mode: remote
+  language: fr
+  sectors:
+    - trading_signals
+    - crypto_signals
+    - forex_signals
+    - stock_market
+    - investment
+mission:
+  primary_goal: Convertir des leads en abonnés aux signaux trading.
+  secondary_goals:
+    - Qualifier le niveau du lead (débutant / intermédiaire / pro)
+    - Comprendre le budget mensuel pour les signaux
+    - Réduire les no-shows et les abandons
+    - Forwarder les leads chauds au trader pro

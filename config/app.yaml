@@ -1,0 +1,28 @@
+bot:
+  name: trading_signals_setter
+  language: fr
+  sequential_updates: true
+  max_message_length: 400
+  forward_channel_link: "https://t.me/+XXXXXXXXXXXX"
+
+runtime:
+  timezone: Europe/Paris
+  retry_attempts: 3
+  retry_backoff_seconds: 2
+  response_timeout_seconds: 30
+
+storage:
+  type: sqlite
+  path: ./data/leads.db
+
+ai:
+  enabled: true
+  model: gpt-4.1-mini
+  temperature: 0.4
+  max_output_tokens: 400
+
+limits:
+  max_followups_per_lead: 4
+  min_seconds_between_replies: 15
+  min_seconds_between_dm: 10
+  daily_dm_limit: 50
